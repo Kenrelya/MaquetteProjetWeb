@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+    <head>
+        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" >
+        <link href="css/styles.css" rel="stylesheet" type="text/css" >
+        <script src="js/jquery.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-animate.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-touch.min.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.10.3/TweenMax.min.js"></script>
+        <script src="http://maps.googleapis.com/maps/api/js"></script>
+        <script src="js/bootstrap.js"></script>
+        <script src="js/index.js"></script>
+    </head>
+    <body>
+        <div class="container" ng-controller="ConnectionController as app">
+                <div id="header" class="col-md-12">
+                    <div class="left">
+                        <a href="#"class="navigation" data-toggle="modal" data-target="#myModal" id="sign" ng-hide="user.login.length">Sign in</a>
+                        <a href="" class="navigation hidden" id="profile" ng-show="user != null" ng-class="{hidden: user.isConnected == false}" ng-click="changeView(1)"><span class="glyphicon glyphicon-user" ng-model="user.login"></span> {{user.login}}</a>
+                        <a href="#" class="navigation hidden" id="home" ng-show="user != null" ng-class="{hidden: user.isConnected == false}" ng-click="goMenu()"><span class="glyphicon glyphicon-home"></span></a>
+                    </div>
+                    <div id="right">
+                        <form class="navbar-form navbar-left" role="search">
+                            <div class="form-group nav">
+                                <input type="text" class="form-control nav">
+                                <button class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+                            </div>
+                        </form>
+                    </div>
+                    <div id="myModal" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header" id="test">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Connection</h4>
+                              </div>
+                              <div class="modal-body" id="md-body">
+                                <p>Login</p>
+                                <input type="text" class="form-control" id="login" ng-model="user.login">
+                                  <p>Password</p>
+                                <input type="password" class="form-control" id="pwd">
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" id ="btnco" ng-click="setUser()">Submit</button>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <div ng-show="isChanged == 0">
+                <div ng-controller="SliderController">
+                    <div class="container slider">
+                        <img ng-repeat="slide in slides" class="slide slide-animation nonDraggableImage image"
+                             ng-swipe-right="nextSlide()" ng-swipe-left="prevSlide()"
+                             ng-hide="!isCurrentSlideIndex($index)" ng-src="{{slide.image}}">
+
+                        <a class="arrow prev" href="#" ng-click="nextSlide()"></a>
+                        <a class="arrow next" href="#" ng-click="prevSlide()"></a>
+                        <nav class="styleSlide">
+                            <div class="wrapper">
+                                <ul class="dots">
+                                    <li class="dot" ng-repeat="slide in slides">
+                                        <a href="#" ng-class="{'active':isCurrentSlideIndex($index)}"
+                                           ng-click="setCurrentSlideIndex($index);">{{slide.description}}
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <img src="https://c2.staticflickr.com/8/7031/6698571299_28362104b2_b.jpg" class="imge"/><br/>
+                        <div class="myfooter">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</div>
+                    </div>
+                    <div class="col-md-4">
+                        <img src="http://ofad.org/files/daily-photo/recent-and-random-portraits_8.jpg" class="imge"/><br/>
+                        <div class="myfooter">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</div>
+                    </div>
+                    <div class="col-md-4">
+                        <img src="http://cdn.sheknows.com/articles/2014/04/Elizabeth_S/1035345/duchenne-smile.jpg" class ="imge"/><br/>
+                        <div class="myfooter">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</div>
+                    </div>
+                </div>
+                <div class="row" id="partners">
+                    <div class="col-md-4">
+                        <img src="http://www.edenred.fr/wp-content/uploads/2015/02/logo-ticket-kadeos_hd.png"/>
+                    </div>
+                    <div class="col-md-4">
+                        <img src="http://www.ncmb.fr/wp-content/uploads/2015/09/logo-fnac-comm.jpg"/>
+                    </div>
+                    <div class="col-md-4">
+                        <img src="http://medias.unifrance.org/medias/102/190/48742/format_hd/gaumont.jpg"/>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="page" ng-show="isChanged ==1">
+               <ul class="nav nav-tabs">
+                    <li ng-class="{active: checkUrl() == 1}"><a data-toggle="tab" href="#info">Info</a></li>
+                    <li><a data-toggle="tab" href="#ayantdroit" ng-class="{active: checkUrl() == 2}">Ayant droit</a></li>
+                   <li><a data-toggle="tab" href="#justif" ng-class="{active: checkUrl() == 3}">Justifications</a></li>
+                   <li><a data-toggle="tab" href="#contact" ng-class="{active: checkUrl() == 4}">Contact</a></li>
+                </ul> 
+                <div id="info" class="tab-pane in active" ng-show="checkUrl() == 1">
+                    <h3>My Profile</h3>
+                    <table id="table" ng-show="!data">
+                        <tr><td><input type=text placeholder="Prenom" ng-model="user.firstname"></td></tr>
+                        <tr><td><input type=text placeholder="Nom" ng-model="user.lastname"></td></tr>
+                        <tr><td><input type=text placeholder="Adresse" ng-model="user.adress"></td></tr>
+                        <tr><td><input type=tel placeholder="Telephone" ng-model="user.phone"></td></tr>
+                        <tr><td><input type=email placeholder="E mail" ng-model="user.mail"></td></tr>
+                        <tr><td><input type=tel placeholder="Ayant droit" ng-model="user.ad"></td></tr>
+                        <tr><td><button class="btn btn-primary" ng-click="dataChanged()">Submit</button></td></tr>
+                    </table>
+                    <div class="alert alert-danger" ng-show="notif">Vous n'avez pas entre les champs correctement</div>
+                    <div ng-show="data">
+                        <table>
+                            <tr><td>First name :</td><td ng-model="user.firstname">{{user.firstname}}</td></tr>
+                            <tr><td>Last name :</td><td ng-model="user.lastname">{{user.lastname}}</td></tr>
+                            <tr><td>Adress :</td><td ng-model="user.adress">{{user.adress}}</td></tr>
+                            <tr><td>Mail :</td><td ng-model="user.mail">{{user.mail}}</td></tr>
+                            <tr><td>Phone :</td><td ng-model="user.phone">{{user.phone}}</td></tr>
+                            <tr><td>Mobile :</td><td ng-model="user.ad">{{user.ad}}</td></tr>
+                        </table>
+                        <button class="btn btn-primary" ng-click="editData()">Edit informations</button>
+                    </div>
+                </div>
+                <div id="ayantdroit" class="tab-pane" ng-show="checkUrl() == 2">
+                    <h3>Ayant droit</h3>
+                    <div ng-hide ="!showAD"><table id="ayantdroit">
+                        <tr><th colspan=7>Liste des ayants droits</th></tr>
+                        <tr>
+                            <td>N</td>
+                            <td>Nom</td>
+                            <td>Prenom</td>
+                            <td>Naissance</td>
+                            <td>Lien de parente</td>
+                            <td>Ayant droits</td>
+                        </tr>
+                        <tr ng-repeat="ayantdroit in ADs">
+                            <td>{{$index + 1}}</td>
+                            <td>{{ayantdroit.lastName}}</td>
+                            <td>{{ayantdroit.firstName}}</td>
+                            <td>{{ayantdroit.birth}}</td>
+                            <td>{{ayantdroit.link}}</td>
+                            <td>{{ayantdroit.ad}}</td>
+                            <td><button class="btn btn-danger" ng-click="deleteAyantDroit($index)">-</button></td>
+                        </tr>
+                    </table>
+                    <button class="btn btn-success" id="addad" ng-click="addAyantDroit()">+</button>
+                </div>
+                <div ng-hide="showAD">
+                    <table>
+                        <tr><td><input type=text placeholder="Last name" ng-model="AD.lastName"></td></tr>
+                        <tr><td><input type=text placeholder="First name" ng-model="AD.firstName"></td></tr>
+                        <tr><td><input type=text placeholder="Birthday" ng-model="AD.birth"></td></tr>
+                        <tr><td><input type=text placeholder="link" ng-model="AD.link"></td></tr>
+                        <tr><td><input type=text placeholder="Ayant droit" ng-model="AD.ad"></td></tr>
+                    </table>
+                    <button class="btn btn-primary" ng-click="addAyantDroit(1)">Submit</button>
+                    <div class="alert alert-danger" ng-show="notif">Vous n'avez pas entre les champs correctement</div>
+                </div>
+            </div>
+            <div id="justif" class="tab-pane" ng-show="checkUrl() == 3">
+                <h3>Justifications</h3>
+                <ul>
+                    <li>Acte de naissance</li>
+                    <li>Contrat de mariage</li>
+                    <li>Passeports et cartes didentite pour les voyages organises</li>
+                    <li>Factures</li>
+                </ul>
+                     RIB
+                        <table>
+                            <tr>
+                                <td><input placeholder="Banque"/></td>
+                                <td><input placeholder="Guichet"/></td>
+                                <td><input placeholder="Num compte"/></td>
+                                <td><input placeholder="Cle"/></td>
+                                <td><input placeholder="Devise"/></td>
+                            </tr>
+                            <tr>
+                                <td colspan="5"><input id ="iban" placeholder="iban"/></td>
+                            </tr>
+                        </table>
+                <button class="btn btn-primary">Edit RIB</button>
+            </div>
+        </div>
+            <div id="contactPage" ng-show="isChanged ==2 || checkUrl() == 4">
+            <table>
+                <tr><td>Last Name: </td><td><input/></td></tr>
+                <tr><td>First Name:</td><td><input/></td></tr>
+                <tr><td>Mail: </td><td><input type="email"/></td></tr>
+                <tr><td>Phone: </td><td><input type="tel"/></td></tr>
+                <tr><td>Message: </td><td><textarea cols="50" rows="10"></textarea></td></tr>
+            </table>
+            </div>
+        <footer>
+            <div class="row">
+              <div class="col-md-4 footer">
+                <h5>CONTACT</h5>
+                  <div class="myfooter">
+                      01.01.01.01.01<br/>
+                      hello_world@example.com<br/>
+                      3 rue de Paris, 75000 Paris<br/>
+                      <a ng-click="changeView(2)">Suggestion</a>
+                  </div>
+              </div>
+              <div class="col-md-4 footer">
+                <h5>NOUS SUIVRE</h5>
+                  <div id="sociallinks">
+                      <a href="http://twitter.com"><img src ="https://cdn1.iconfinder.com/data/icons/new_twitter_icon/491/bird_twitter_new_single.png"/></a>
+                      <a href="http://facebook.com"><img src ="http://www.icone-png.com/png/3/3054.png"/></a>
+                      <a href="http://instagram.com"><img src="http://icons.iconarchive.com/icons/limav/flat-gradient-social/512/Instagram-icon.png"/></a>
+                      </div>
+                  </div>
+                <div class="col-md-4 footer" id="about">
+                    <h5>A PROPOS DE NOUS</h5>
+                    <div class="myfooter">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+                    </div>
+                </div>
+            </div>
+        </footer>
+        </div>
+    </body>
+</html>
